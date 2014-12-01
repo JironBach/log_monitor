@@ -1,0 +1,46 @@
+production: &base
+  monitor:
+    target: /var/log/production.log
+    words: Completed 500 Internal Server Error
+  method: email
+  email:
+    to: admin@*.com
+    from: monitor@*.com
+    address: smtp.gmail.com
+    port: 587
+    user_name: *@gmail.com
+    password: *****
+    subject: [Alert! *.com 500 error occured!]
+
+development:
+  monitor:
+    target: /var/log/development.log
+    words:
+      - Completed 500 Internal Server Error
+      - Completed 404 Not Found
+  method:
+    - email
+    - webhook
+  email:
+    to:
+      - admin@*.com
+      - develper@*.com
+      - tester@*.com
+    from: monitor@*.com
+    address: smtp.gmail.com
+    port: 587
+    user_name: *@gmail.com
+    password: *****
+    subject: [Alert! *.com Error occured!]
+  webhook: http://localhost:3000/monitor/post/
+
+staging:
+  <<: *base
+
+test:
+  monitor:
+    target: ~/log/test.log
+    words: Completed 404 Not Found
+  method: webhook
+  webhook: http://localhost:3000/monitor/post/
+
