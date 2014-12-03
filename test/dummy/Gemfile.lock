@@ -1,7 +1,10 @@
-PATH
-  remote: ~/work/log_monitor
+GIT
+  remote: git://github.com/JironBach/log_monitor.git
+  revision: c81286c1e4b9be4e27fc38becc088ebe642d9fd5
+  branch: develop
   specs:
     log_monitor (0.0.1)
+      rails (~> 4.1.8)
 
 GEM
   remote: https://rubygems.org/
@@ -72,7 +75,7 @@ GEM
       activesupport (= 4.1.8)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.0)
+    rake (10.4.1)
     rdoc (4.1.2)
       json (~> 1.4)
     sass (3.2.19)

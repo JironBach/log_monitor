@@ -1,2 +1,2 @@
-Logmonitor::Engine.routes.draw do
+LogMonitor::Engine.routes.draw do
 end

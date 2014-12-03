@@ -38,5 +38,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'log_monitor', path:"~/work/log_monitor"
+gem 'log_monitor', :git => 'git://github.com/JironBach/log_monitor.git', :branch => "develop"
 
