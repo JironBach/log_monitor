@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/JironBach/log_monitor.git
-  revision: 459dff3ce463dce325021d852ae9313f8e5a856c
+  revision: ded4a7bc60d0b08c229b1bfbe0937358179c9501
   branch: develop
   specs:
     log_monitor (0.0.1)
-      rails (~> 4.1.8)
+      rails (~> 4.1.0)
 
 GEM
   remote: https://rubygems.org/
