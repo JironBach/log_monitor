@@ -26,9 +26,9 @@ module LogMonitor
 
     def monitor
       begin
-        #while true
+        while true
           revival_monitor
-        #end
+        end
       ensure
         @in.close
       end
