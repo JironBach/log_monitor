@@ -4,16 +4,13 @@ require "log_monitor/alerter"
 module LogMonitor
   class Factory
     def self.get(config)
-      puts 'called get'
       alerter = self.get_alerter(config)
-      puts "#{alerter.inspect}"
       alerter.set_in(config['monitor']['target'])
       alerter.set_words(['Completed'])
       alerter
     end
 
     def self.get_alerter(config)
-      puts config.inspect
       if config['method'] == 'email'
         alerter = LogMonitor::EmailAlerter.new
         alerter.set_email(config['email'])
