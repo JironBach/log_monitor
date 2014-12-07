@@ -6,7 +6,7 @@ module LogMonitor
     def self.get(config)
       alerter = self.get_alerter(config)
       alerter.set_in(config['monitor']['target'])
-      alerter.set_words(['Completed'])
+      alerter.set_words(config['monitor']['words'])
       alerter
     end
 
