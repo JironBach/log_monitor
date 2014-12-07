@@ -11,6 +11,7 @@ module LogMonitor
     end
 
     def self.get_alerter(config)
+      puts config.inspect
       if config['method'] == 'email'
         alerter = LogMonitor::MailAlerter.new
         alerter.set_email(config['email'])
