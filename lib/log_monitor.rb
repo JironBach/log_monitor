@@ -11,8 +11,9 @@ module LogMonitor
     end
 
     def self.get_alerter(config)
-      if config['method'] == 'mail'
+      if config['method'] == 'email'
         alerter = LogMonitor::MailAlerter.new
+        alerter.set_email(config['email'])
       elsif config['method'] == 'webhook'
         alerter = LogMonitor::WebHookAlerter.new
       elsif config['method'] == 'file'

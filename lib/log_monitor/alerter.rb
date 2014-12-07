@@ -103,20 +103,20 @@ module LogMonitor
   require 'net/smtp'
   require 'mail'
   class MailAlerter < Alerter
-    def set_mail(config)
+    def set_email(config)
       @smtp_settings = {
-        address: config['email']['address'],
-        port: config['email']['port'],
-        user_name: config['email']['user_name'],
-        password: config['email']['password'],
-        domain: config['email']['domain'],
-        authentication: config['email']['authentication'].nil? ? :plain : config['email']['authentication'],
+        address: config['address'],
+        port: config['port'],
+        user_name: config['user_name'],
+        password: config['password'],
+        domain: config['domain'],
+        authentication: config['authentication'].nil? ? :plain : config['authentication'],
         enable_starttls_auto: true
       }
       @mail = Mail.new
-      @mail[:from] = config['email']['from']
-      @mail[:to] = 'jironbach@gmail.com'#config['email']['from']
-      @mail.subject = config['email']['subject']
+      @mail[:from] = config['from']
+      @mail[:to] = 'jironbach@gmail.com'#config['from']
+      @mail.subject = config['subject']
     end
 
     def alert
