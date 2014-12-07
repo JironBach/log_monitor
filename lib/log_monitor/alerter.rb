@@ -138,7 +138,23 @@ module LogMonitor
   end
 
 
-  class WebHookAlerter < Alerter
+  class WebPostAlerter < Alerter
+    def set_email(config)
+      @config = config
+      @url = config['webpost']
+    end
+
+    def alert
+      begin
+        Net::HTTP.post_form(URI.parse(@url), { body: @alert_body })
+      rescue => e
+        $stderr.puts "LogMonitor error"
+        $stderr.puts e.message
+        2.times $stderr.puts
+      end
+      clear_alert
+    end
+
   end
 
 end
