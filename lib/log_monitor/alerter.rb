@@ -10,6 +10,7 @@ module LogMonitor
     end
 
     def set_in(io_in)
+      @io_in = io_in
       if io_in == 'STRERR'
         @in = $stderr
       elsif io_in == 'STROUT'
@@ -65,12 +66,9 @@ module LogMonitor
     protected
 
     def revival_monitor
-      #debug
-      File.open('/tmp/log_monitor.log', 'a') do |file|
-        file.puts 'revival'
-      end
       return if @in.nil?
       while true
+        set_in(@io_in) if @in.eof
         line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
