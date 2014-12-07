@@ -36,7 +36,10 @@ module LogMonitor
     def check_words
       is_alert = false
       @words.each do |word|
-        is_alert = true if @alert_body.include? word
+        if @alert_body.include? word
+          is_alert = true
+          break
+        end
       end
       if is_alert
         alert

@@ -1,5 +1,4 @@
 require 'log_monitor'
-require 'log_monitor/alerter'
 
 class LogMonitorRunner
   def self.execute
