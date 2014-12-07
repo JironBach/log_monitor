@@ -84,8 +84,8 @@ module LogMonitor
     end
 
     def alert
-      File.open(@filename) do | @io_out |
-        @io_out.puts @alert_body
+      File.open(@filename) do | io_out |
+        io_out.puts @alert_body
       end
       clear_alert
     end
