@@ -100,7 +100,40 @@ module LogMonitor
   end
 
 
+  require 'net/smtp'
+  require 'mail'
   class MailAlerter < Alerter
+    def set_mail(config)
+      @smtp_settings = {
+        address: config['email']['address'],
+        port: config['email']['port'],
+        user_name: config['email']['user_name'],
+        password: config['email']['password'],
+        domain: config['email']['domain'],
+        authentication: config['email']['authentication'].nil? ? :plain : config['email']['authentication'],
+        enable_starttls_auto: true
+      }
+      @mail = Mail.new
+      @mail[:from] = config['email']['from']
+      @mail[:to] = 'jironbach@gmail.com'#config['email']['from']
+      @mail.subject = config['email']['subject']
+    end
+
+    def alert
+      begin
+        smtpserver = Net::SMTP.new(@smtp_settings[:address], @smtp_settings[:port])
+        #smtpserver.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+        smtpserver.start(@smtp_settings[:domain], @smtp_settings[:user_name], @smtp_settings[:password], :login) do |smtp|
+          smtp.send_message(@alert_body, mail.from, mail.to)
+        end
+      rescue => e
+        $stderr.puts "LogMonitor error"
+        $stderr.puts e.message
+        2.times $stderr.puts
+      end
+      clear_alert
+    end
+
   end
 
 
