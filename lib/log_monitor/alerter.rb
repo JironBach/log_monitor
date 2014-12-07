@@ -100,10 +100,13 @@ module LogMonitor
   end
 
 
+  require 'net/smtp'
   require 'mail'
   require 'tlsmail'
   class EmailAlerter < Alerter
     def set_email(config)
+      Net.instance_eval {remove_const :SMTPSession} if defined?(SMTPSession)
+      SMTPSession = SMTP
       @config = config
       @smtp_settings = {
         address: config['address'],
