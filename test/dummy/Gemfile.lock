@@ -1,11 +1,10 @@
 GIT
   remote: git://github.com/JironBach/log_monitor.git
-  revision: 429096644e3f1289301c1c959394500f08f360ef
+  revision: 55a5a1678b1b00b03366adf4e0f03af30bc0fd5d
   branch: develop
   specs:
     log_monitor (0.0.1)
       rails (~> 4.1.0)
-      tlsmail
 
 GEM
   remote: https://rubygems.org/
@@ -102,7 +101,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    tlsmail (0.0.1)
     turbolinks (2.5.2)
       coffee-rails
     tzinfo (1.2.2)
