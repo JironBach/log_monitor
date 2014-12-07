@@ -139,7 +139,7 @@ module LogMonitor
 
 
   class WebPostAlerter < Alerter
-    def set_email(config)
+    def set_webpost(config)
       @config = config
       @url = config['webpost']
     end
