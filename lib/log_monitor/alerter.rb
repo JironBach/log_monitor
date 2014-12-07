@@ -145,7 +145,7 @@ module LogMonitor
 
     def alert
       begin
-        Net::HTTP.post_form(URI.parse(@url), { body: "logmonitor-webpost-log : #{ @alert_body }"})
+        Net::HTTP.post_form(URI.parse(@url), { checker: 'logmonitor-webpost-log', body: "#{ @alert_body }"})
       rescue => e
         $stderr.puts "LogMonitor error"
         $stderr.puts e.message
@@ -157,7 +157,7 @@ module LogMonitor
     def check_words
       is_alert = false
       @words.each do | word |
-        if @alert_body.include?(word) && !@alert_body.include?('logmonitor-webpost-log : ')
+        if @alert_body.include?(word) && !@alert_body.include?('logmonitor-webpost-log')
           is_alert = true
           break
         end
