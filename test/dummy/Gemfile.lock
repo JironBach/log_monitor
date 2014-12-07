@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/JironBach/log_monitor.git
-  revision: 89303c22903fc53b2c7f0d7a3a4c5b9bc1bc3da6
+  revision: 73f5a8d08e01bf8478b2fe0b47093d92714395cf
   branch: develop
   specs:
     log_monitor (0.0.1)
