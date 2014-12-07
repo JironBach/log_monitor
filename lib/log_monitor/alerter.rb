@@ -26,13 +26,10 @@ module LogMonitor
 
     def monitor
       begin
-        t = Thread.new do
-          while
-            revival_monitor
-          end
+        while
+          revival_monitor
         end
       ensure
-        Thread::kill(t)
         @in.close
       end
     end
