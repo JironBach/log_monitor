@@ -2,10 +2,12 @@ require 'log_monitor'
 
 class LogMonitorRunner
   def self.execute
-    alerter = LogMonitor::Alerter.new
-    alerter.set_words(['Completed'])
-    alerter.set_in('log/development.log')
-    alerter.monitor
+    Thread.new do
+      config = YAML.load_file('config/log-monitor.yml')['development']
+      alerter = LogMonitor::Factory.get(config)
+      alerter.monitor
+    end
+    sleep
   end
 end
 
