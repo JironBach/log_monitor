@@ -32,7 +32,7 @@ module LogMonitor
     def check_words
       is_alert = false
       @words.each do | word |
-        if @alert_body.include? word
+        if @alert_body.include?(word)
           is_alert = true
           break
         end
@@ -140,17 +140,30 @@ module LogMonitor
 
   class WebPostAlerter < Alerter
     def set_webpost(config)
-      @config = config
       @url = config
     end
 
     def alert
       begin
-        Net::HTTP.post_form(URI.parse(@url), { body: @alert_body })
+        Net::HTTP.post_form(URI.parse(@url), { body: "logmonitor-webpost-log : #{ @alert_body }"})
       rescue => e
         $stderr.puts "LogMonitor error"
         $stderr.puts e.message
         2.times $stderr.puts
+      end
+      clear_alert
+    end
+
+    def check_words
+      is_alert = false
+      @words.each do | word |
+        if @alert_body.include?(word) && !@alert_body.include?('logmonitor-webpost-log : ')
+          is_alert = true
+          break
+        end
+      end
+      if is_alert
+        alert
       end
       clear_alert
     end
