@@ -26,15 +26,9 @@ module LogMonitor
     end
 
     def monitor
+      @in.seek(0, IO::SEEK_END)
       begin
-        while true
-          if @last_line.nil?
-            @in.seek(0, IO::SEEK_END)
-          else
-            @last_line.times { @in.gets }
-          end
           revival_monitor
-        end
       ensure
         @in.close
       end
@@ -71,7 +65,7 @@ module LogMonitor
 
     def revival_monitor
       return if @in.nil?
-      while !@in.eof
+      while true
         line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
@@ -81,7 +75,6 @@ module LogMonitor
         end
         check_words if @blank_line_count >= 2
       end
-      @last_line = @in.lineno
     end
 
   end
