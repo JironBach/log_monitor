@@ -102,7 +102,7 @@ module LogMonitor
 
   require 'net/smtp'
   require 'mail'
-  require 'openssl'
+  require 'tlsmail'
   class MailAlerter < Alerter
     def set_email(config)
       @smtp_settings = {
