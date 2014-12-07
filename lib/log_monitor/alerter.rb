@@ -102,7 +102,7 @@ module LogMonitor
 
   require 'net/smtp'
   Net.instance_eval {remove_const :SMTPSession} if defined?(SMTPSession)
-  SMTPSession = SMTP
+  #SMTPSession = SMTP
   require 'mail'
   require 'tlsmail'
   class EmailAlerter < Alerter
