@@ -70,10 +70,6 @@ module LogMonitor
     protected
 
     def revival_monitor
-      #debug
-      File.open('/tmp/log_monitor.log', 'a') do |file|
-        file.puts 'revival'
-      end
       return if @in.nil?
       while !@in.eof
         line = @in.gets
