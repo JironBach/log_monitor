@@ -4,7 +4,7 @@ require "log_monitor/alerter"
 module LogMonitor
   class LogMonitorFactory
     def self.get(config)
-      alerter = get_alerter(config)
+      alerter = self.get_alerter(config)
       alerter.set_in(config['monitor']['target'])
       alerter.set_words(['Completed'])
       alerter
