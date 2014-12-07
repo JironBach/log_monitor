@@ -70,8 +70,7 @@ module LogMonitor
       end
       return if @in.nil?
       @in.seek(0, IO::SEEK_END)
-      while
-        line = @in.gets
+      while line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
           @blank_line_count += 1
