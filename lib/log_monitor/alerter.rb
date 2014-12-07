@@ -68,7 +68,6 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       while true
-        set_in(@io_in) if @in.eof
         line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
@@ -77,6 +76,7 @@ module LogMonitor
           @blank_line_count = 0
         end
         check_words if @blank_line_count >= 2
+        set_in(@io_in) if @in.eof
       end
     end
 
