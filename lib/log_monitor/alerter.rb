@@ -31,7 +31,7 @@ module LogMonitor
           if @last_line.nil?
             @in.seek(0, IO::SEEK_END)
           else
-            @last_line.times @in.gets
+            @last_line.times { @in.gets }
           end
           revival_monitor
         end
