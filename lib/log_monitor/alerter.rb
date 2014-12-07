@@ -26,10 +26,13 @@ module LogMonitor
 
     def monitor
       begin
-        while true
-          revival_monitor
+        t = Thread.new do
+          while
+            revival_monitor
+          end
         end
       ensure
+        Thread::kill(t)
         @in.close
       end
     end
@@ -66,7 +69,8 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       @in.seek(0, IO::SEEK_END)
-      while line = @in.gets
+      while
+        line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
           @blank_line_count += 1
