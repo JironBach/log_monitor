@@ -66,8 +66,7 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       @in.seek(0, IO::SEEK_END)
-      while true
-        line = @in.gets
+      while line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
           @blank_line_count += 1
