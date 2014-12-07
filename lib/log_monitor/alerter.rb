@@ -84,7 +84,8 @@ module LogMonitor
     end
 
     def alert
-      File.open(@filename) do | io_out |
+      puts "alert to #{@filename}"
+      File.open(@filename, 'a') do | io_out |
         io_out.puts @alert_body
       end
       clear_alert
