@@ -66,7 +66,7 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       while true
-        line = @in.gets
+        line = @in.gets unless @in.eof
         @alert_body += "#{line}"
         if line.blank?
           @blank_line_count += 1
@@ -79,8 +79,10 @@ module LogMonitor
 
   end
 
+
   class MailAlerter < Alerter
   end
+
 
   class WebHookAlerter < Alerter
   end
