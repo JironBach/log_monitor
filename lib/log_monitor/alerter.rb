@@ -100,7 +100,6 @@ module LogMonitor
   end
 
 
-  require 'net/smtp'
   require 'mail'
   require 'tlsmail'
   class EmailAlerter < Alerter
