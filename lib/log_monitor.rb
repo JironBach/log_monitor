@@ -16,7 +16,7 @@ module LogMonitor
         alerter.set_email(config['email'])
       elsif config['method'] == 'webpost'
         alerter = LogMonitor::WebPostAlerter.new
-        alerter.set_webpost(config)
+        alerter.set_webpost(config['webpost'])
       elsif config['method'] == 'file'
         alerter = LogMonitor::FileAlerter.new
         alerter.set_out(config['file'])

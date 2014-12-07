@@ -4,7 +4,7 @@ class MonitorController < ApplicationController
   end
 
   def post
-    logger.debug "debug by JironBach:#{params.inspect}"
+    logger.debug "debug by JironBach : webpost"
     render text: params[:body]
   end
 
