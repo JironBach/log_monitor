@@ -1,11 +1,8 @@
 require 'log_monitor'
 
 Thread.new do
-  alerter = LogMonitor::FileAlerter.new
-  alerter.set_words(['Completed'])
-  alerter.set_in('log/development.log')
-  alerter.set_out('tmp/log-monitor.log')
+  config = YAML.load_file('config/log-monitor.yml')['development']
+  alerter = LogMonitor::LogMonitorFactory.get(config)
   alerter.monitor
 end
-while true
-end
+sleep

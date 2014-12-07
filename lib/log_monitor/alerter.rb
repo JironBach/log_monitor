@@ -1,7 +1,6 @@
 module LogMonitor
   class Alerter
     def initialize
-      @io_out = $stdout
       clear_alert
     end
 
@@ -50,7 +49,13 @@ module LogMonitor
     end
 
     def alert
-      @io_out.puts @alert_body
+      begin
+        $stdout.puts @alert_body
+      rescue => e
+        $stderr.puts "LogMonitor error"
+        $stderr.puts e.message
+        2.times $stderr.puts
+      end
       clear_alert
     end
 
@@ -75,18 +80,19 @@ module LogMonitor
 
 
   class FileAlerter < Alerter
-    def initialize
-      clear_alert
-    end
-
     def set_out(filename)
       @filename = filename
     end
 
     def alert
-      puts "alert to #{@filename}"
-      File.open(@filename, 'a') do | io_out |
-        io_out.puts @alert_body
+      begin
+        File.open(@filename, 'a') do | io_out |
+          io_out.puts @alert_body
+        end
+      rescue => e
+        $stderr.puts "LogMonitor error"
+        $stderr.puts e.message
+        2.times $stderr.puts
       end
       clear_alert
     end
