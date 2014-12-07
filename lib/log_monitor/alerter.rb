@@ -114,6 +114,7 @@ module LogMonitor
         authentication: config['authentication'].nil? ? :plain : config['authentication'],
         enable_starttls_auto: true
       }
+      puts config.inspect
       @mail = Mail.new
       @mail[:from] = config['from']
       @mail[:to] = 'jironbach@gmail.com'#config['from']
@@ -125,8 +126,8 @@ module LogMonitor
         smtpserver = Net::SMTP.new(@smtp_settings[:address], @smtp_settings[:port])
         smtpserver.enable_tls(OpenSSL::SSL::VERIFY_NONE)
         smtpserver.start(@smtp_settings[:domain], @smtp_settings[:user_name], @smtp_settings[:password], :login) do |smtp|
-          mail.body = @alert_body
-          smtp.send_message(mail.encoded, mail.from, mail.to)
+          @mail.body = @alert_body
+          smtp.send_message(@mail.encoded, @mail.from, @mail.to)
         end
       rescue => e
         $stderr.puts "LogMonitor error"
