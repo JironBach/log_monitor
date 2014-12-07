@@ -2,7 +2,7 @@
 require "log_monitor/alerter"
 
 module LogMonitor
-  class LogMonitorFactory
+  class Factory
     def self.get(config)
       puts 'called get'
       alerter = self.get_alerter(config)
