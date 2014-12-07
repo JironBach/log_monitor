@@ -105,6 +105,7 @@ module LogMonitor
   require 'tlsmail'
   class MailAlerter < Alerter
     def set_email(config)
+      puts "called set_email : #{config.inspet}"
       @smtp_settings = {
         address: config['address'],
         port: config['port'],
@@ -114,7 +115,7 @@ module LogMonitor
         authentication: config['authentication'].nil? ? :plain : config['authentication'],
         enable_starttls_auto: true
       }
-      puts config.inspect
+      puts @smtp_settings.inspect
       @mail = Mail.new
       @mail[:from] = config['from']
       @mail[:to] = 'jironbach@gmail.com'#config['from']
