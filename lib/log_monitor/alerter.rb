@@ -103,9 +103,9 @@ module LogMonitor
   require 'net/smtp'
   require 'mail'
   require 'tlsmail'
-  class MailAlerter < Alerter
+  class EmailAlerter < Alerter
     def set_email(config)
-      puts "called set_email : #{config.inspet}"
+      puts "called set_email : #{config.inspect}"
       @smtp_settings = {
         address: config['address'],
         port: config['port'],
