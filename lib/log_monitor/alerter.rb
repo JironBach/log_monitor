@@ -14,7 +14,8 @@ module LogMonitor
         @in = $stderr
       elsif io_in == 'STROUT'
         @in = $stdout
-      elsif File.exists?(io_in)
+      else
+        FileUtils.touch(io_in) unless File.exists?(io_in)
         @in = File.open(io_in, 'r')
       end
     end
