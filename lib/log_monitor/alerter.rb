@@ -19,6 +19,11 @@ module LogMonitor
         #FileUtils.touch(io_in) unless File.exists?(io_in)
         @in = File.open(io_in, 'r')
       end
+      if @last_line == 0
+        @in.seek(0, IO::SEEK_END)
+      else
+        @last_line.times @in.gets
+      end
     end
 
     def set_words(words)
@@ -26,7 +31,6 @@ module LogMonitor
     end
 
     def monitor
-      @in.seek(0, IO::SEEK_END)
       begin
         while true
           revival_monitor
@@ -76,6 +80,7 @@ module LogMonitor
           @blank_line_count = 0
         end
         check_words if @blank_line_count >= 2
+        @last_line = @in.lineno
         set_in(@io_in) if @in.eof
       end
     end
