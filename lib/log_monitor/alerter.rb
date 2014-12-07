@@ -122,6 +122,7 @@ module LogMonitor
 
     def alert
       begin
+        puts @mail.inspect
         smtpserver = Net::SMTP.new(@smtp_settings[:address], @smtp_settings[:port])
         smtpserver.enable_tls(OpenSSL::SSL::VERIFY_NONE)
         smtpserver.start(@smtp_settings[:domain], @smtp_settings[:user_name], @smtp_settings[:password], :login) do |smtp|
