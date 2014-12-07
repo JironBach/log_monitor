@@ -19,7 +19,6 @@ module LogMonitor
         #FileUtils.touch(io_in) unless File.exists?(io_in)
         @in = File.open(io_in, 'r')
       end
-      @in.seek(0, IO::SEEK_END)
     end
 
     def set_words(words)
@@ -27,6 +26,7 @@ module LogMonitor
     end
 
     def monitor
+      @in.seek(0, IO::SEEK_END)
       begin
         while true
           revival_monitor
