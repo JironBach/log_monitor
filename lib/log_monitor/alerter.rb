@@ -1,11 +1,7 @@
 module LogMonitor
   class Alerter
     def initialize
-      #debug
-      File.open('/tmp/log_monitor.log', 'w') do |file|
-        file.puts 'LogMonitor new'
-        file.puts Time.now
-      end
+      @io_out = $stdout
       clear_alert
     end
 
@@ -16,7 +12,7 @@ module LogMonitor
       elsif io_in == 'STROUT'
         @in = $stdout
       else
-        #FileUtils.touch(io_in) unless File.exists?(io_in)
+        FileUtils.touch(io_in) unless File.exists?(io_in)
         @in = File.open(io_in, 'r')
       end
     end
@@ -54,10 +50,7 @@ module LogMonitor
     end
 
     def alert
-      #debug
-      File.open('/tmp/log_monitor.log', 'a') do |file|
-        file.puts @alert_body
-      end
+      @io_out.puts @alert_body
       clear_alert
     end
 
@@ -66,7 +59,7 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       while true
-        sleep(5) if @in.eof
+        sleep(1) if @in.eof
         line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
@@ -76,6 +69,25 @@ module LogMonitor
         end
         check_words if @blank_line_count >= 2
       end
+    end
+
+  end
+
+
+  class FileAlerter < Alerter
+    def initialize
+      clear_alert
+    end
+
+    def set_out(filename)
+      @filename = filename
+    end
+
+    def alert
+      File.open(@filename) do | @io_out |
+        @io_out.puts @alert_body
+      end
+      clear_alert
     end
 
   end
