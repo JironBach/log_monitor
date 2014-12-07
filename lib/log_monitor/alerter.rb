@@ -66,7 +66,8 @@ module LogMonitor
     def revival_monitor
       return if @in.nil?
       while true
-        line = @in.gets unless @in.eof
+        next if @in.eof
+        line = @in.gets
         @alert_body += "#{line}"
         if line.blank?
           @blank_line_count += 1
