@@ -18,6 +18,7 @@ module LogMonitor
         FileUtils.touch(io_in) unless File.exists?(io_in)
         @in = File.open(io_in, 'r')
       end
+      @in.seek(0, IO::SEEK_END)
     end
 
     def set_words(words)
@@ -36,7 +37,7 @@ module LogMonitor
 
     def check_words
       is_alert = false
-      @words.each do |word|
+      @words.each do | word |
         if @alert_body.include? word
           is_alert = true
           break
@@ -69,7 +70,6 @@ module LogMonitor
         file.puts 'revival'
       end
       return if @in.nil?
-      @in.seek(0, IO::SEEK_END)
       while true
         line = @in.gets
         @alert_body += "#{line}"
