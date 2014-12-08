@@ -11,10 +11,59 @@ gem "log-monitor"
 
 ### Usage ###
 #### As RAILS plugin ####
-* Run `log-monitor -c > config/log-monitor.yml` and edit it.
-* Run `log-monitor -i > config/initializers/log-monitor.rb`.
+* Create config/log-monitor.yml
+```
+monitor:
+  target: /tmp/log/development.log
+  words:
+    - Completed 500 Internal Server Error
+    - No route matches
+method: file # or console or email or webpost
+file: /tmp/log-monitor.log
+webpost: http://localhost:3000/monitor/post # ignored which not selected as method
+email: # ignored which not selected as method
+  to:
+    - *@*.com
+  from: *@gmail.com
+  subject: Alert! *.com Error occured!
+  address: smtp.gmail.com
+  port: 587
+  user_name: *@gmail.com
+  password: [password]
+```
+
+* Create config/initializers/log-monitor.rb
+```
+Thread.new do
+  config_file = Rails.root.join('config', 'log-monitor.yml')
+  config = YAML.load_file(config_file)#[Rails.env]
+  alerter = LogMonitor::Factory.get(config)
+  alerter.monitor
+end
+```
+
 #### As standalone application ####
-* Run `log-monitor -c > log-monitor.yml` and edit it.
+* Create log-monitor.yml
+```
+monitor:
+  target: /tmp/log/development.log
+  words:
+    - Completed 500 Internal Server Error
+    - No route matches
+method: file # or console or email or webpost
+file: /tmp/log-monitor.log
+webpost: http://localhost:3000/monitor/post # ignored which not selected as method
+email: # ignored which not selected as method
+  to:
+    - *@*.com
+  from: *@gmail.com
+  subject: Alert! *.com Error occured!
+  address: smtp.gmail.com
+  port: 587
+  user_name: *@gmail.com
+  password: [password]
+```
+
 * Run `log-monitor log-monitor.yml`
 
 ### System requirement ###
