@@ -33,8 +33,8 @@ end
 EOF
 
 elsif !ARGV[0].nil? && File.exist?(ARGV[0])
-  Thread.new do
-    config = YAML.load_file(ARGV[1])
+  config = YAML.load_file(ARGV[0])
+  Thread.new(config) do | config |
     alerter = LogMonitor::Factory.get(config)
     alerter.monitor
   end
