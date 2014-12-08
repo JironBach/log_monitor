@@ -60,4 +60,5 @@ test/dummy/public/assets/
 test/dummy/.envrc
 test/dummy/dump.rdb
 test/dummy/tags
+test/dummy/Gemfile.lock
 

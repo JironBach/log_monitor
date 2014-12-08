@@ -1,3 +1,5 @@
 = LogMonitor
 
+Monitoring web server's log. And raise alert with email, webpost, file, or console.
+
 This project rocks and uses MIT-LICENSE.

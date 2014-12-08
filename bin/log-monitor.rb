@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#require 'log_monitor'
+require 'log_monitor'
 
 if ARGV[0] == '-c'
   puts <<EOF
@@ -21,6 +21,17 @@ email: # ignored which not selected as method
   user_name: *@gmail.com
   password: [password]
 EOF
+
+elsif ARGV[0] == '-i'
+  puts <<EOF
+Thread.new do
+  config_file = Rails.root.join('config', 'log-monitor.yml')
+  config = YAML.load_file(config_file)#[Rails.env]
+  alerter = LogMonitor::Factory.get(config)
+  alerter.monitor
+end
+EOF
+
 elsif !ARGV[0].nil? && File.exist?(ARGV[0])
   Thread.new do
     config = YAML.load_file(ARGV[1])
@@ -31,7 +42,8 @@ elsif !ARGV[0].nil? && File.exist?(ARGV[0])
 else
   puts <<EOF
 (none or other) : show help (this message)
--c : show example of config file. Please use rediret.
+-c : show example of config file. Please use with rediret.
+-i : show example of initializer of RAILS's file. Please use with rediret.
 [config file] : run monitoring log
 EOF
 end
