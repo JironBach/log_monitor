@@ -6,14 +6,8 @@ module LogMonitor
 
     def set_in(io_in)
       @io_in = io_in
-      if io_in == 'STRERR'
-        @in = $stderr
-      elsif io_in == 'STROUT'
-        @in = $stdout
-      else
-        FileUtils.touch(io_in) unless File.exists?(io_in)
-        @in = File.open(io_in, 'r')
-      end
+      FileUtils.touch(io_in) unless File.exists?(io_in)
+      @in = File.open(io_in, 'r')
     end
 
     def set_words(words)
@@ -169,6 +163,7 @@ module LogMonitor
     end
 
   end
+
 
 end
 

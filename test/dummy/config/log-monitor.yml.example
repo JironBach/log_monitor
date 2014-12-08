@@ -1,0 +1,49 @@
+production: &base
+  monitor:
+    target: log/production.log
+    words:
+      - Completed 500 Internal Server Error
+  method: email
+  email:
+    to: *@gmail.com
+    from: *@gmail.com
+    subject: Alert! *.com 500 error occured!
+    address: smtp.gmail.com
+    port: 587
+    user_name: *@gmail.com
+    password: [password]
+
+development:
+  monitor:
+    target: log/development.log
+    words:
+      - Completed 500 Internal Server Error
+      - No route matches
+  method: email
+  email:
+    to:
+      - dev@gmail.com
+      - admin@gmail.com
+    from: *@gmail.com
+    subject: Alert! *.com Error occured!
+    address: smtp.gmail.com
+    port: 587
+    user_name: *@gmail.com
+    password: [password]
+
+staging:
+  <<: *base
+  monitor:
+    target: log/staging.log
+  method: file
+  file: tmp/log-monitor.log
+
+test:
+  monitor:
+    target: log/test.log
+    words:
+      - Completed 500 Internal Server Error
+      - Completed 404 Not Found
+  method: webpost
+  webpost: http://localhost:3000/monitor/post
+

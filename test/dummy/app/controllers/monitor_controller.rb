@@ -5,7 +5,6 @@ class MonitorController < ApplicationController
   end
 
   def post
-    logger.debug "debug by JironBach : webpost"
     render nothing: true
   end
 
