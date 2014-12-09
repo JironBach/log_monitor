@@ -36,8 +36,8 @@ EOF
 
 elsif !ARGV[0].nil? && File.exist?(ARGV[0])
   config = YAML.load_file(ARGV[0])
-  Thread.new(config) do | config |
-    alerter = LogMonitor::Factory.get(config)
+  Thread.new(config) do | prm_cfg |
+    alerter = LogMonitor::Factory.get(prm_cfg)
     alerter.monitor
   end
   sleep
