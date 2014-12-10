@@ -18,7 +18,7 @@ monitor:
   words:
     - Completed 500 Internal Server Error
     - No route matches
-method: file # or console or email or webpost
+method: file # ,console, email or webpost
 file: /tmp/log-monitor.log
 webpost: http://localhost:3000/monitor/post # ignored which not selected as method
 email: # ignored which not selected as method
@@ -52,7 +52,7 @@ monitor:
   words:
     - Completed 500 Internal Server Error
     - No route matches
-method: file # or console or email or webpost
+method: file # ,console, email or webpost
 file: /tmp/log-monitor.log
 webpost: http://localhost:3000/monitor/post # ignored which not selected as method
 email: # ignored which not selected as method
