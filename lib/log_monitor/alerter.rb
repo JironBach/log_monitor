@@ -26,7 +26,7 @@ module LogMonitor
     def check_words
       is_alert = false
       @words.each do | word |
-        if @alert_body.include?(word)
+        if @alert_body.match(/#{word}/)
           is_alert = true
           break
         end
