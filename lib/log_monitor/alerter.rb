@@ -151,7 +151,7 @@ module LogMonitor
     def check_words
       is_alert = false
       @words.each do | word |
-        if @alert_body.include?(word) && !@alert_body.include?('logmonitor-webpost-log')
+        if @alert_body.match(/#{word}/) && !@alert_body.include?('logmonitor-webpost-log')
           is_alert = true
           break
         end
