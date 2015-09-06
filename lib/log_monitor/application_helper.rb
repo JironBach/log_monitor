@@ -1,0 +1,2 @@
+module LogMonitor::ApplicationHelper
+end
