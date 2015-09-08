@@ -12,3 +12,6 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+
+gem 'tlsmail', git: 'git://github.com/JironBach/tlsmail'
+

@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.1"
-  s.add_dependency "tlsmail", "~> 0"
+  s.add_dependency gem 'tlsmail', git: 'git://github.com/JironBach/tlsmail'
 
   #s.add_development_dependency "tlsmail"
 end
